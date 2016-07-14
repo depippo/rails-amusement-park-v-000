@@ -1,0 +1,11 @@
+<h4> Name: <%= @attraction.name %> </h4>
+<h4> Ticket cost: <%= @attraction.tickets %> </h4>
+<h4> Nausea rating: <%= @attraction.nausea_rating %> </h4>
+<h4> Happiness rating: <%= @attraction.happiness_rating %> </h4>
+<h4> Minimum height: <%= @attraction.min_height %> </h4>
+
+<% if current_user.admin? %>
+  <%= link_to 'Edit Attraction', edit_attraction_path(@attraction) %>
+<% else %>
+  <%= button_to 'Go on this ride', {:controller => "rides", :action => "create", :attraction_id => @attraction.id, :user_id => current_user.id} , :method=>:post  %>
+<% end %>

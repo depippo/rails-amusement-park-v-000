@@ -23,12 +23,21 @@
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-           <!--  nav here -->
+            <% if logged_in? %>
+              <a class="navbar-brand" href="<%= user_path(current_user) %>"/>Hello, <%= current_user.name %> </a>
+              <a class="navbar-brand" href="<%= attractions_path %>"/>Attractions</a>
+              <a class="navbar-brand"<%= link_to "Log Out", signout_path, method: :delete %>
+            <% else %>
+              <a class="navbar-brand"<%= link_to "Sign up", new_user_path %>
+              <a class="navbar-brand"<%= link_to "Sign in", signin_path %>
+            <% end %>
           </ul>
         </div><!--/.nav-collapse -->
       </div>
     </div>
-
+    <% if flash[:alert] %>
+        <div id="flash_alert"><%= flash[:alert] %></div>
+    <% end %>
     <!-- content -->
     <div class="container"  role="main">
       <%= yield %>
